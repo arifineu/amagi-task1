@@ -1,0 +1,9 @@
+.wrapper {
+  padding: 24px;
+}
+
+.toggle-button {
+  margin-bottom: 1rem;
+  padding: 8px;
+  width: 140px;
+}
