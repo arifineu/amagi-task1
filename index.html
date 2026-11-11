@@ -26,7 +26,7 @@
                 const patient = patients[i]
                 const child = document.createElement('div')
                 
-                child.textContent = "ID: " + patient.id + "; Name: " + patient.name + "; Status: " + patient.status + "; Balance: " + patient.balance + "; Ward: " + patient.ward
+                child.textContent = `ID: ${patient.id}; Name: ${patient.name}; Status: ${patient.status}; Balance: ${patient.balance}; Ward: ${patient.ward};`
                 child.dataset.status = patient.status
                 child.style.marginTop = ("8px")
                 child.style.padding = ("8px")
@@ -43,8 +43,8 @@
                 button.textContent = hideDischarged ? "Show All" : "Hide Discharged"
 
                 for (let i = 0; i< rows.length; i++) {
-                    if (hideDischarged && rows[i].dataset.status === "Discharged") rows[i].remove()
-                    else app.appendChild(rows[i])
+                    const isDischarged = rows[i].dataset.status === "Discharged"
+                    rows[i].hidden = hideDischarged && isDischarged ? "none" : ""
                 }
             }
         </script>
