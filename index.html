@@ -12,17 +12,40 @@
             ]
 
             const app = document.getElementById('app')
+            const rows = []
+            let hideDischarged = false
+
+            const button = document.createElement('button')
+            button.style.marginBottom = ("1rem")
+            button.style.padding = ("8px")
+            button.textContent = "Hide Discharged"
+            button.addEventListener('click', toggleBtn)
+            app.appendChild(button)
 
             for (let i = 0; i < patients.length; i++) {
                 const patient = patients[i]
                 const child = document.createElement('div')
                 
-                child.textContent = patient.id + " - " + patient.name + " - " + patient.status + " - " + patient.balance + " - " + patient.ward
+                child.textContent = "ID: " + patient.id + "; Name: " + patient.name + "; Status: " + patient.status + "; Balance: " + patient.balance + "; Ward: " + patient.ward
+                child.dataset.status = patient.status
+                child.style.marginTop = ("8px")
+                child.style.padding = ("8px")
                 
                 if (patient.status === "Discharged") child.style.backgroundColor = "#E0E0E0"
                 if (patient.balance > 0 && patient.status === "Active") child.style.border = "2px solid red"
 
+                rows.push(child)
                 app.appendChild(child)
+            }
+
+            function toggleBtn() {
+                hideDischarged = !hideDischarged
+                button.textContent = hideDischarged ? "Show All" : "Hide Discharged"
+
+                for (let i = 0; i< rows.length; i++) {
+                    if (hideDischarged && rows[i].dataset.status === "Discharged") rows[i].remove()
+                    else app.appendChild(rows[i])
+                }
             }
         </script>
     </body>
